@@ -28,8 +28,11 @@ export class CoursesController {
   @Get()
   async courses(@Request() req, @Body() createCoursesDto: CreateCoursesDto) {
     const courses = await this.coursesService.getCourses(req.user._id);
-    const user = req.user.email;
-
+    let user = req.user.email;
+    console.log(user)
+    if(!user){
+      user='noUser';
+    }
     return { courses, user };
   }
 
