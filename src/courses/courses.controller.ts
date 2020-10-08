@@ -30,10 +30,10 @@ export class CoursesController {
     const courses = await this.coursesService.getCourses(req.user._id);
     let user = req.user.email;
     console.log(user)
-    if(!user){
-      user='noUser';
+    if(user){
+      return { courses, user };
     }
-    return { courses, user };
+    return { courses, user:'noUser' };
   }
 
   @Get(":id")
