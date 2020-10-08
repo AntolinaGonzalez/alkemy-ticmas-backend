@@ -17,7 +17,7 @@ import { ContentsModule } from './contents/contents.module';
   controllers: [AppController],
   imports: [
     CoursesModule,
-    MongooseModule.forRoot('mongodb://mongo_db:27017/ticmas', {
+    MongooseModule.forRoot('mongodb+srv://bmrec:oLM36WuO5ZUKlU9o@cluster0.y2qus.mongodb.net/ticmas?retryWrites=true&w=majority', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -32,6 +32,6 @@ export class AppModule {
   static port: number | string;
 
   constructor(private readonly _configService: ConfigService) {
-    AppModule.port = this._configService.get(Configuration.PORT);
+    AppModule.port = process.env.PORT;
   }
 }
