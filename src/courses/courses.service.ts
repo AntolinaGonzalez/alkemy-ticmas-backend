@@ -18,7 +18,6 @@ export class CoursesService {
 
     async getCourses(userId: string){
         const courses = await this.courseModel.find({creator_id : userId})
-        console.log(courses)
         return courses;
     }
     
