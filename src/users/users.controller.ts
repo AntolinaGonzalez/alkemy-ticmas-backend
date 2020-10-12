@@ -37,10 +37,6 @@ export class UsersController {
     return this.service.signIn(req.user);
   }
 
-  @Get()
-  user(){
-    return this.service.currentUser;
-  }
   
   @Delete()
   async delete(@Body('email') email: string) {
