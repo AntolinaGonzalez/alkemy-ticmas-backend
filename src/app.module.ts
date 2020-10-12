@@ -15,7 +15,7 @@ import { ContentsModule } from "./contents/contents.module";
   imports: [
     CoursesModule,
     MongooseModule.forRoot(
-      "mongodb+srv://bmrec:oLM36WuO5ZUKlU9o@cluster0.y2qus.mongodb.net/ticmas?retryWrites=true&w=majority",
+      "mongodb//localhost/nest",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
