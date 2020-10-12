@@ -15,6 +15,7 @@ import { SeccionsModule } from 'src/seccions/seccions.module';
         ]), UsersModule    
     ],
     controllers: [CoursesController],
-    providers: [CoursesService]
+    providers: [CoursesService],
+    exports:[CoursesService]
 })
 export class CoursesModule  {}

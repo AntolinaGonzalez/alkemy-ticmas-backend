@@ -47,6 +47,11 @@ export class UsersService {
     }
   }
 
+  async findById(userId: string){
+    const user = await this.Model.findBy(userId);
+    return user;
+  }
+
   async delete(email: string) {
     const user = await this.Model.findOne({ email });
     try {

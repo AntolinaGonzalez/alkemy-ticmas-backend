@@ -24,17 +24,24 @@ export class CoursesController {
     private sectionsService: SeccionsService
   ) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  async courses(@Request() req, @Body() createCoursesDto: CreateCoursesDto) {
-    const courses = await this.coursesService.getCourses(req.user._id);
-    let user = req.user.email;
-    console.log(user)
-    if(user){
-      return { courses, user };
-    }
-    return { courses, user:'noUser' };
+  @Get("/:id/courses")
+  async courses(@Request() req, @Param("id") id) {
+    const courses = await this.coursesService.getCourses(id);
+
+    return { courses };
   }
+
+  // @UseGuards(JwtAuthGuard)
+  // @Get()
+  // async courses(@Request() req, @Body() createCoursesDto: CreateCoursesDto) {
+  //   const courses = await this.coursesService.getCourses(req.user._id);
+  //   let user = req.user.email;
+  //   console.log(user);
+  //   if (user) {
+  //     return { courses, user };
+  //   }
+  //   return { courses, user: "noUser" };
+  // }
 
   @Get(":id")
   async getCourse(@Res() res, @Param("id") id) {
@@ -43,23 +50,40 @@ export class CoursesController {
     return res.status(HttpStatus.OK).json(course);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post("create")
+  @Post("/:id")
   async storeCourse(
     @Request() req,
     @Res() res,
     @Body() createCoursesDto: CreateCoursesDto
   ) {
-    createCoursesDto = req.body.course;
+    createCoursesDto = req.body;
+
     const course = await this.coursesService.createCourse({
       ...createCoursesDto,
-      creator_id: req.user._id,
+      creator_id: req.body.id,
     });
     return res.status(HttpStatus.OK).json({
       message: "received",
       course,
     });
   }
+  // @UseGuards(JwtAuthGuard)
+  // @Post("create")
+  // async storeCourse(
+  //   @Request() req,
+  //   @Res() res,
+  //   @Body() createCoursesDto: CreateCoursesDto
+  // ) {
+  //   createCoursesDto = req.body.course;
+  //   const course = await this.coursesService.createCourse({
+  //     ...createCoursesDto,
+  //     creator_id: req.user._id,
+  //   });
+  //   return res.status(HttpStatus.OK).json({
+  //     message: "received",
+  //     course,
+  //   });
+  // }
 
   @Delete(":id")
   async deleteCourse(@Res() res, @Param("id") id) {
@@ -108,8 +132,8 @@ export class CoursesController {
     return this.sectionsService.getSeccions(param.creator_id);
   }
 
-  @Get('/:id/section')
-  async findOne(@Param('id') id){
+  @Get("/:id/section")
+  async findOne(@Param("id") id) {
     const section = await this.sectionsService.findOne(id);
     return section;
   }

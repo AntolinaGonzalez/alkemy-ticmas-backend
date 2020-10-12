@@ -16,10 +16,10 @@ export class CoursesService {
        return await course.save();
     }
 
-    async getCourses(userId: string): Promise<Course> {
-        const course = await this.courseModel.find({creator_id : userId})
-        console.log(this.courseModel.find({creator_id : userId}))
-        return course;
+    async getCourses(userId: string){
+        const courses = await this.courseModel.find({creator_id : userId})
+        console.log(courses)
+        return courses;
     }
     
     async getCourse(courseId: string): Promise<Course> {
