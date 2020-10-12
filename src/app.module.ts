@@ -17,7 +17,7 @@ import { ContentsModule } from './contents/contents.module';
   controllers: [AppController],
   imports: [
     CoursesModule,
-    MongooseModule.forRoot('mongodb://mongo_db:27017/ticmas', {
+    MongooseModule.forRoot('mongodb://localhost/ticmas', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
